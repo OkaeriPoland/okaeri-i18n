@@ -5,7 +5,7 @@
     <parent>
         <artifactId>okaeri-i18n</artifactId>
         <groupId>eu.okaeri</groupId>
-        <version>1.1.0</version>
+        <version>1.1.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -19,8 +19,8 @@
     <dependencies>
         <dependency>
             <groupId>eu.okaeri</groupId>
-            <artifactId>okaeri-placeholders</artifactId>
-            <version>1.2.0</version>
+            <artifactId>okaeri-placeholders-core</artifactId>
+            <version>1.3.1</version>
         </dependency>
     </dependencies>
 
