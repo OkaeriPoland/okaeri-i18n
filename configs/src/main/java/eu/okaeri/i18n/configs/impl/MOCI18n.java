@@ -12,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -38,7 +39,7 @@ public class MOCI18n extends SimpleI18n<String, Message> {
             if (strValue == null) {
                 return;
             }
-            map.put(key, CompiledMessage.of(strValue));
+            map.put(key, CompiledMessage.of(locale, strValue));
         });
 
         this.configs.put(locale, map);
@@ -52,11 +53,17 @@ public class MOCI18n extends SimpleI18n<String, Message> {
         Map<String, CompiledMessage> map = this.configs.get(locale);
 
         if (map == null) {
+            map = this.configs.get(Locale.forLanguageTag(locale.getLanguage()));
+        }
+
+        if (map == null) {
             map = this.configs.get(this.getDefaultLocale());
         }
 
         if (map == null) {
-            throw new RuntimeException("cannot find config for " + locale);
+            throw new RuntimeException("cannot find config for " + locale + " [available: " + this.configs.keySet().stream()
+                    .map(Locale::toString)
+                    .collect(Collectors.joining(", ")) + "]");
         }
 
         CompiledMessage message = map.get(key);
