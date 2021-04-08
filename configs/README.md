@@ -2,6 +2,9 @@
 
 Based on [OkaeriPoland/okaeri-configs](https://github.com/OkaeriPoland/okaeri-configs), simple Java/POJO config library written with love and Lombok.
 
+- `MOCI18n`: powerful messages with placeholders (recommended)
+- `OCI18n`: simple messages (just strings)
+
 ## Installation
 ### Maven
 Add repository to the `repositories` section:
