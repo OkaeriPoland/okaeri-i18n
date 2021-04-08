@@ -31,5 +31,5 @@ implementation 'eu.okaeri:okaeri-i18n-configs:1.0.0'
 
 ## Example
 
-It is recommended to get familiar with configurer (format provider) concept of the okaeri-configs first. 
+It is recommended to get familiar with [use and configurer (format provider) concept](https://github.com/OkaeriPoland/okaeri-configs#usage) of the okaeri-configs first. 
 For the example usage refer to the [tests](https://github.com/OkaeriPoland/okaeri-i18n/tree/master/configs/src/test/java/eu/okaeri/i18ntest).
