@@ -18,9 +18,9 @@ See full examples in the [tests](https://github.com/OkaeriPoland/okaeri-i18n/tre
 
 ```java
 // example of manual transformation to String
-this.i18n.get(sender, this.messages.getExampleMessage()).apply()
+this.i18n.get(sender, this.messages.getExampleMessage()).apply();
 // example of fields use
-return this.i18n.get(sender, this.messages.getExampleMessage())
+this.i18n.get(sender, this.messages.getExampleMessage())
     .with("name", "John")
     .wih("age", 123)
     .apply();
