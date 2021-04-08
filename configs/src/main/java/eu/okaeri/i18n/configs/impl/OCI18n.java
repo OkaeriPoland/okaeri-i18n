@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -33,11 +34,17 @@ public class OCI18n extends SimpleI18n<String, String> {
         Map<String, String> map = this.configs.get(locale);
 
         if (map == null) {
+            map = this.configs.get(Locale.forLanguageTag(locale.getLanguage()));
+        }
+
+        if (map == null) {
             map = this.configs.get(this.getDefaultLocale());
         }
 
         if (map == null) {
-            throw new RuntimeException("cannot find config for " + locale);
+            throw new RuntimeException("cannot find config for " + locale + " [available: " + this.configs.keySet().stream()
+                    .map(Locale::toString)
+                    .collect(Collectors.joining(", ")) + "]");
         }
 
         String message = map.get(key);
