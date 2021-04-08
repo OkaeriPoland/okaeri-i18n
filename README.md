@@ -1,9 +1,9 @@
 # Okaeri Messages (okaeri-i18n)
 
-![License](https://img.shields.io/github/license/OkaeriPoland/okaeri-placeholders)
-![Total lines](https://img.shields.io/tokei/lines/github/OkaeriPoland/okaeri-placeholders)
-![Repo size](https://img.shields.io/github/repo-size/OkaeriPoland/okaeri-placeholders)
-![Contributors](https://img.shields.io/github/contributors/OkaeriPoland/okaeri-placeholders)
+![License](https://img.shields.io/github/license/OkaeriPoland/okaeri-i18n)
+![Total lines](https://img.shields.io/tokei/lines/github/OkaeriPoland/okaeri-i18n)
+![Repo size](https://img.shields.io/github/repo-size/OkaeriPoland/okaeri-i18n)
+![Contributors](https://img.shields.io/github/contributors/OkaeriPoland/okaeri-i18n)
 [![Discord](https://img.shields.io/discord/589089838200913930)](https://discord.gg/hASN5eX)
 
 Simple yet powerful localization library built with blazing-fast [okaeri-placeholders](https://github.com/OkaeriPoland/okaeri-placeholders).
