@@ -26,11 +26,11 @@ public final class LocaleConfigManager {
         return config;
     }
 
-    public static <T extends OkaeriConfig> T create(Class<T> clazz, Configurer configurer, File bindFile) throws OkaeriException {
+    public static <T extends OkaeriConfig> T create(Class<T> clazz, Configurer configurer, File bindFile, boolean clearValues) throws OkaeriException {
         return ConfigManager.create(clazz, it -> {
             it.withConfigurer(configurer);
             it.withBindFile(bindFile);
-            it.getDeclaration().getFields().forEach(field -> field.updateValue(null));
+            if (clearValues) it.getDeclaration().getFields().forEach(field -> field.updateValue(null));
         });
     }
 }
