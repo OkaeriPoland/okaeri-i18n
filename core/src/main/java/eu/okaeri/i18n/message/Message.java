@@ -22,7 +22,7 @@ public class Message {
     public static Message of(Placeholders placeholders, CompiledMessage compiled) {
 
         PlaceholderContext context = (placeholders == null)
-                ? PlaceholderContext.create()
+                ? PlaceholderContext.of(compiled)
                 : placeholders.contextOf(compiled);
 
         return new Message(compiled, context);
