@@ -42,6 +42,10 @@ public class Message {
         return this.context.apply();
     }
 
+    public String raw() {
+        return this.compiled.getRaw();
+    }
+
     public String source() {
         if (this.context == null) throw new IllegalArgumentException("compiled cannot be null");
         return this.compiled.getRaw();
