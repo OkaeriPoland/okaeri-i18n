@@ -1,6 +1,7 @@
 package eu.okaeri.i18n.provider;
 
 import lombok.AccessLevel;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Locale;
@@ -9,7 +10,7 @@ import java.util.function.Function;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class SimpleLocaleProvider<T> implements LocaleProvider<T> {
 
-    public static <A> SimpleLocaleProvider<A> of(Class<A> type, Function<A, Locale> localeFunction) {
+    public static <A> SimpleLocaleProvider<A> of(@NonNull Class<A> type, @NonNull Function<A, Locale> localeFunction) {
         return new SimpleLocaleProvider<A>(type, localeFunction);
     }
 

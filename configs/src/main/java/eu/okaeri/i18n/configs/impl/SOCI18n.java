@@ -3,6 +3,7 @@ package eu.okaeri.i18n.configs.impl;
 import eu.okaeri.i18n.configs.OCI18n;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 import java.util.Locale;
 
@@ -11,12 +12,12 @@ import java.util.Locale;
 public class SOCI18n extends OCI18n<String, String> {
 
     @Override
-    public String storeConfigValue(Locale locale, Object value) {
+    public String storeConfigValue(@NonNull Locale locale, @NonNull Object value) {
         return String.valueOf(value);
     }
 
     @Override
-    public String createMessageFromStored(String object, String key) {
+    public String createMessageFromStored(String object, @NonNull String key) {
         if (object == null) {
             return "<" + key + ">";
         }

@@ -1,6 +1,7 @@
 package eu.okaeri.i18n.configs;
 
 import eu.okaeri.i18n.SimpleI18n;
+import lombok.NonNull;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -12,7 +13,7 @@ public abstract class OCI18n<S, R> extends SimpleI18n<String, R> {
 
     private final Map<Locale, Map<String, S>> configs = new ConcurrentHashMap<>();
 
-    public OCI18n<S, R> registerConfig(Locale locale, LocaleConfig config) {
+    public OCI18n<S, R> registerConfig(@NonNull Locale locale, @NonNull LocaleConfig config) {
 
         Map<String, Object> configMap = config.asMap(config.getConfigurer(), true);
         Map<String, S> map = new LinkedHashMap<>();
@@ -28,7 +29,7 @@ public abstract class OCI18n<S, R> extends SimpleI18n<String, R> {
     }
 
     @Override
-    public R get(Object entity, String key) {
+    public R get(@NonNull Object entity, @NonNull String key) {
 
         Locale locale = super.getLocale(entity);
         Map<String, S> map = this.configs.get(locale);

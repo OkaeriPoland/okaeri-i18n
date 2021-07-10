@@ -7,12 +7,13 @@ import eu.okaeri.configs.configurer.InMemoryConfigurer;
 import eu.okaeri.configs.exception.OkaeriException;
 import eu.okaeri.configs.schema.ConfigDeclaration;
 import eu.okaeri.configs.schema.FieldDeclaration;
+import lombok.NonNull;
 
 import java.io.File;
 
 public final class LocaleConfigManager {
 
-    public static <T extends OkaeriConfig> T createTemplate(Class<T> clazz) throws OkaeriException {
+    public static <T extends OkaeriConfig> T createTemplate(@NonNull Class<T> clazz) throws OkaeriException {
 
         T config = ConfigManager.create(clazz);
         config.withConfigurer(new InMemoryConfigurer());
@@ -26,7 +27,7 @@ public final class LocaleConfigManager {
         return config;
     }
 
-    public static <T extends OkaeriConfig> T create(Class<T> clazz, Configurer configurer, File bindFile, boolean clearValues) throws OkaeriException {
+    public static <T extends OkaeriConfig> T create(@NonNull Class<T> clazz, @NonNull Configurer configurer, @NonNull File bindFile, boolean clearValues) throws OkaeriException {
         return ConfigManager.create(clazz, it -> {
             it.withConfigurer(configurer);
             it.withBindFile(bindFile);
