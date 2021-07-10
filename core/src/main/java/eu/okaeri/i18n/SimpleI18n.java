@@ -2,6 +2,7 @@ package eu.okaeri.i18n;
 
 import eu.okaeri.i18n.provider.LocaleProvider;
 import lombok.Data;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +21,13 @@ public abstract class SimpleI18n<K, M> implements I18n<K, M> {
     }
 
     @Override
-    public <T> I18n registerLocaleProvider(LocaleProvider<T> localeProvider) {
+    public <T> I18n registerLocaleProvider(@NonNull LocaleProvider<T> localeProvider) {
         this.localeProviders.add(localeProvider);
         return this;
     }
 
     @Override
-    public <T> I18n registerLocaleProvider(Class<?> overrideType, LocaleProvider<T> localeProvider) {
+    public <T> I18n registerLocaleProvider(@NonNull Class<?> overrideType, @NonNull LocaleProvider<T> localeProvider) {
         List<LocaleProvider<?>> providers = this.localeProviders.stream()
                 .filter(provider -> !provider.supports(overrideType))
                 .collect(Collectors.toList());
@@ -37,7 +38,7 @@ public abstract class SimpleI18n<K, M> implements I18n<K, M> {
     }
 
     @Override
-    public LocaleProvider getLocaleProvider(Class<?> entityType) {
+    public LocaleProvider getLocaleProvider(@NonNull Class<?> entityType) {
         return this.localeProviders.stream()
                 .filter(provider -> provider.supports(entityType))
                 .findAny()
@@ -46,11 +47,9 @@ public abstract class SimpleI18n<K, M> implements I18n<K, M> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Locale getLocale(Object entity) {
+    public Locale getLocale(@NonNull Object entity) {
 
-        if (entity == null) throw new IllegalArgumentException("entity cannot be null");
         LocaleProvider localeProvider = this.getLocaleProvider(entity.getClass());
-
         if (localeProvider == null) {
             return this.getDefaultLocale();
         }

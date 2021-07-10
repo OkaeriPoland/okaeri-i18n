@@ -6,6 +6,7 @@ import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 import java.util.Locale;
 
@@ -24,12 +25,12 @@ public class MOCI18n extends OCI18n<CompiledMessage, Message> {
     }
 
     @Override
-    public CompiledMessage storeConfigValue(Locale locale, Object value) {
+    public CompiledMessage storeConfigValue(@NonNull Locale locale, @NonNull Object value) {
         return CompiledMessage.of(locale, String.valueOf(value));
     }
 
     @Override
-    public Message createMessageFromStored(CompiledMessage object, String key) {
+    public Message createMessageFromStored(CompiledMessage object, @NonNull String key) {
         if (object == null) {
             return Message.of("<" + key + ">");
         }
