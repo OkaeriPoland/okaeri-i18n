@@ -19,7 +19,7 @@ Add dependency to the `dependencies` section:
 <dependency>
   <groupId>eu.okaeri</groupId>
   <artifactId>okaeri-i18n-configs</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
 </dependency>
 ```
 ### Gradle
@@ -29,7 +29,7 @@ maven { url "https://storehouse.okaeri.eu/repository/maven-public/" }
 ```
 Add dependency to the `maven` section:
 ```groovy
-implementation 'eu.okaeri:okaeri-i18n-configs:1.2.1'
+implementation 'eu.okaeri:okaeri-i18n-configs:1.2.2'
 ```
 
 ## Example
