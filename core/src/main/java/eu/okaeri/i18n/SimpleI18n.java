@@ -49,6 +49,10 @@ public abstract class SimpleI18n<K, M> implements I18n<K, M> {
     @SuppressWarnings("unchecked")
     public Locale getLocale(@NonNull Object entity) {
 
+        if (entity instanceof Locale) {
+            return (Locale) entity;
+        }
+
         LocaleProvider localeProvider = this.getLocaleProvider(entity.getClass());
         if (localeProvider == null) {
             return this.getDefaultLocale();
