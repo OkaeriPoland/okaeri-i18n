@@ -10,7 +10,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Data
-public abstract class SimpleI18n<K, M> implements I18n<K, M> {
+public abstract class SimpleI18n<K, M, D> implements I18n<K, M, D> {
 
     private final List<LocaleProvider<?>> localeProviders = new ArrayList<>();
     private Locale defaultLocale = Locale.getDefault();
