@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-public abstract class OCI18n<S, R> extends SimpleI18n<String, R> {
+public abstract class OCI18n<S, R, D> extends SimpleI18n<String, R, D> {
 
     private final Map<Locale, Map<String, S>> configs = new ConcurrentHashMap<>();
 
-    public OCI18n<S, R> registerConfig(@NonNull Locale locale, @NonNull LocaleConfig config) {
+    public OCI18n<S, R, D> registerConfig(@NonNull Locale locale, @NonNull LocaleConfig config) {
 
         Map<String, Object> configMap = config.asMap(config.getConfigurer(), true);
         Map<String, S> map = new LinkedHashMap<>();
@@ -59,6 +59,11 @@ public abstract class OCI18n<S, R> extends SimpleI18n<String, R> {
         }
 
         return this.createMessageFromStored(message, key);
+    }
+
+    @Override
+    public D get(String key) {
+        throw new RuntimeException("feature not implemented yet");
     }
 
     public abstract S storeConfigValue(Locale locale, Object value);
