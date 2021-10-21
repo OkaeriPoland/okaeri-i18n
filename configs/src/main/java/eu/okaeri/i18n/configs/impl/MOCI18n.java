@@ -8,6 +8,7 @@ import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 
@@ -31,7 +32,7 @@ public class MOCI18n extends OCI18n<CompiledMessage, Message, MessageDispatcher<
     }
 
     @Override
-    public Message createMessageFromStored(CompiledMessage object, @NonNull String key) {
+    public Message createMessageFromStored(@Nullable CompiledMessage object, @NonNull String key) {
         if (object == null) {
             return Message.of("<" + key + ">");
         }

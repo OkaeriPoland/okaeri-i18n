@@ -2,6 +2,7 @@ package eu.okaeri.i18n.configs;
 
 import eu.okaeri.i18n.SimpleI18n;
 import lombok.NonNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -62,11 +63,11 @@ public abstract class OCI18n<S, R, D> extends SimpleI18n<String, R, D> {
     }
 
     @Override
-    public D get(String key) {
+    public D get(@NonNull String key) {
         throw new RuntimeException("feature not implemented yet");
     }
 
-    public abstract S storeConfigValue(Locale locale, Object value);
+    public abstract S storeConfigValue(@NonNull Locale locale, @NonNull Object value);
 
-    public abstract R createMessageFromStored(S object, String key);
+    public abstract R createMessageFromStored(@Nullable S object, @NonNull String key);
 }
