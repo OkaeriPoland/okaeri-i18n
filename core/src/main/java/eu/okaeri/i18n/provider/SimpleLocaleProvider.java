@@ -18,12 +18,12 @@ public class SimpleLocaleProvider<T> implements LocaleProvider<T> {
     private final Function<T, Locale> localeFunction;
 
     @Override
-    public boolean supports(Class<?> type) {
+    public boolean supports(@NonNull Class<?> type) {
         return this.type.isAssignableFrom(type);
     }
 
     @Override
-    public Locale getLocale(T entity) {
+    public Locale getLocale(@NonNull T entity) {
         return this.localeFunction.apply(entity);
     }
 }

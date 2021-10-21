@@ -4,6 +4,7 @@ import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.context.PlaceholderContext;
 import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.*;
+import org.jetbrains.annotations.Nullable;
 
 
 @ToString
@@ -31,7 +32,7 @@ public class Message {
     private final CompiledMessage compiled;
     private final PlaceholderContext context;
 
-    public Message with(@NonNull String field, Object value) {
+    public Message with(@NonNull String field, @Nullable Object value) {
         if (this.context == null) throw new IllegalArgumentException("context cannot be null");
         this.context.with(field, value);
         return this;
