@@ -6,6 +6,8 @@ import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Map;
+
 
 @ToString
 @EqualsAndHashCode
@@ -35,6 +37,12 @@ public class Message {
     public Message with(@NonNull String field, @Nullable Object value) {
         if (this.context == null) throw new IllegalArgumentException("context cannot be null");
         this.context.with(field, value);
+        return this;
+    }
+
+    public Message with(@NonNull Map<String, Object> fields) {
+        if (this.context == null) throw new IllegalArgumentException("context cannot be null");
+        this.context.with(fields);
         return this;
     }
 
