@@ -10,12 +10,12 @@ import java.util.function.Function;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class SimpleLocaleProvider<T> implements LocaleProvider<T> {
 
+    private final Class<?> type;
+    private final Function<T, Locale> localeFunction;
+
     public static <A> SimpleLocaleProvider<A> of(@NonNull Class<A> type, @NonNull Function<A, Locale> localeFunction) {
         return new SimpleLocaleProvider<A>(type, localeFunction);
     }
-
-    private final Class<?> type;
-    private final Function<T, Locale> localeFunction;
 
     @Override
     public boolean supports(@NonNull Class<?> type) {
