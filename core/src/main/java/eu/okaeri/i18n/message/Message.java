@@ -14,6 +14,9 @@ import java.util.Map;
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class Message {
 
+    private final CompiledMessage compiled;
+    private final PlaceholderContext context;
+
     public static Message of(@NonNull String raw) {
         return of(null, raw);
     }
@@ -25,14 +28,11 @@ public class Message {
     public static Message of(Placeholders placeholders, @NonNull CompiledMessage compiled) {
 
         PlaceholderContext context = (placeholders == null)
-                ? PlaceholderContext.of(compiled)
-                : placeholders.contextOf(compiled);
+            ? PlaceholderContext.of(compiled)
+            : placeholders.contextOf(compiled);
 
         return new Message(compiled, context);
     }
-
-    private final CompiledMessage compiled;
-    private final PlaceholderContext context;
 
     public Message with(@NonNull String field, @Nullable Object value) {
         if (this.context == null) throw new IllegalArgumentException("context cannot be null");

@@ -29,8 +29,8 @@ public abstract class SimpleI18n<K, M, D> implements I18n<K, M, D> {
     @Override
     public <T> I18n registerLocaleProvider(@NonNull Class<?> overrideType, @NonNull LocaleProvider<T> localeProvider) {
         List<LocaleProvider<?>> providers = this.localeProviders.stream()
-                .filter(provider -> !provider.supports(overrideType))
-                .collect(Collectors.toList());
+            .filter(provider -> !provider.supports(overrideType))
+            .collect(Collectors.toList());
         providers.add(localeProvider);
         this.localeProviders.clear();
         this.localeProviders.addAll(providers);
@@ -40,9 +40,9 @@ public abstract class SimpleI18n<K, M, D> implements I18n<K, M, D> {
     @Override
     public LocaleProvider getLocaleProvider(@NonNull Class<?> entityType) {
         return this.localeProviders.stream()
-                .filter(provider -> provider.supports(entityType))
-                .findAny()
-                .orElse(null);
+            .filter(provider -> provider.supports(entityType))
+            .findAny()
+            .orElse(null);
     }
 
     @Override

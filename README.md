@@ -10,6 +10,7 @@ Simple yet powerful localization library built with blazing-fast [okaeri-placeho
 Part of the [okaeri-platform](https://github.com/OkaeriPoland/okaeri-platform).
 
 ## Implementations
+
 - [configs](https://github.com/OkaeriPoland/okaeri-i18n/tree/master/configs): based on [okaeri-configs](https://github.com/OkaeriPoland/okaeri-configs) with support for accessing messages through getters (compile time key checking!)
 
 ## Example

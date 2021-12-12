@@ -45,8 +45,8 @@ public abstract class OCI18n<S, R, D> extends SimpleI18n<String, R, D> {
 
         if (map == null) {
             throw new RuntimeException("cannot find config for " + locale + " [available: " + this.configs.keySet().stream()
-                    .map(Locale::toString)
-                    .collect(Collectors.joining(", ")) + "]");
+                .map(Locale::toString)
+                .collect(Collectors.joining(", ")) + "]");
         }
 
         S message = map.get(key);
