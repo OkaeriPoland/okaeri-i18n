@@ -23,6 +23,6 @@ this.i18n.get(sender, this.messages.getExampleMessage()).apply();
 // example of fields use
 this.i18n.get(sender, this.messages.getExampleMessage())
     .with("name", "John")
-    .wih("age", 123)
+    .with("age", 123)
     .apply();
 ```
