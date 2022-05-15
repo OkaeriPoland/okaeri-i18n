@@ -60,7 +60,7 @@ public abstract class SimpleI18n<K, M, D> implements I18n<K, M, D> {
 
         Locale locale = localeProvider.getLocale(entity);
         if (locale == null) {
-            throw new RuntimeException("locale provider " + localeProvider.getClass().getSimpleName() + " returned null for: " + entity);
+            return this.getDefaultLocale();
         }
 
         return locale;
