@@ -58,7 +58,7 @@ public class TestMoc {
         TestLocaleConfig messages = LocaleConfigManager.createTemplate(TestLocaleConfig.class);
 
         i18n.setPlaceholders(Placeholders.create()
-            .registerPlaceholder(CommandSender.class, "name", (e, p) -> e.getName()));
+            .registerPlaceholder(CommandSender.class, "name", (e, p, o) -> e.getName()));
 
         i18n.registerConfig(Locale.ENGLISH, ConfigManager.create(TestLocaleConfig.class, it -> {
             it.withConfigurer(new ObdfConfigurer());
