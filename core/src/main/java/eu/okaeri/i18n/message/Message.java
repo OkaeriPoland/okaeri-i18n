@@ -11,11 +11,12 @@ import java.util.Map;
 
 @ToString
 @EqualsAndHashCode
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
 public class Message {
 
-    private final CompiledMessage compiled;
-    private final PlaceholderContext context;
+    protected final CompiledMessage compiled;
+    protected PlaceholderContext context;
 
     public static Message of(@NonNull String raw) {
         return of(null, raw);
@@ -46,6 +47,11 @@ public class Message {
         return this;
     }
 
+    public Message with(@NonNull PlaceholderContext context) {
+        this.context = context;
+        return this;
+    }
+
     public String apply() {
         if (this.context == null) throw new IllegalArgumentException("context cannot be null");
         return this.context.apply();
@@ -57,5 +63,9 @@ public class Message {
 
     public CompiledMessage compiled() {
         return this.compiled;
+    }
+
+    public PlaceholderContext context() {
+        return this.context;
     }
 }
