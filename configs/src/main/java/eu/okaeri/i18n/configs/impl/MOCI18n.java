@@ -34,7 +34,7 @@ public class MOCI18n extends OCI18n<CompiledMessage, Message, MessageDispatcher<
     @Override
     public Message createMessageFromStored(@Nullable CompiledMessage object, @NonNull String key) {
         if (object == null) {
-            return Message.of("<" + key + ">");
+            return Message.of(Locale.ENGLISH, "<" + key + ">");
         }
         return Message.of(this.placeholders, object);
     }
