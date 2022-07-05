@@ -6,6 +6,7 @@ import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.*;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -18,12 +19,22 @@ public class Message {
     protected final CompiledMessage compiled;
     protected PlaceholderContext context;
 
+    @Deprecated
     public static Message of(@NonNull String raw) {
-        return of(null, raw);
+        return of(null, CompiledMessage.of(raw));
     }
 
+    public static Message of(@NonNull Locale locale, @NonNull String raw) {
+        return of(null, locale, raw);
+    }
+
+    @Deprecated
     public static Message of(Placeholders placeholders, @NonNull String raw) {
         return of(placeholders, CompiledMessage.of(raw));
+    }
+
+    public static Message of(Placeholders placeholders, @NonNull Locale locale, @NonNull String raw) {
+        return of(placeholders, CompiledMessage.of(locale, raw));
     }
 
     public static Message of(Placeholders placeholders, @NonNull CompiledMessage compiled) {
