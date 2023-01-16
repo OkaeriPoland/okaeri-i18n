@@ -1,4 +1,4 @@
-package eu.okaeri.i18n.provider;
+package eu.okaeri.i18n.locale;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

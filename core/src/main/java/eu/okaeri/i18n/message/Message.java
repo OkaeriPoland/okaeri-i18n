@@ -3,80 +3,65 @@ package eu.okaeri.i18n.message;
 import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.context.PlaceholderContext;
 import eu.okaeri.placeholders.message.CompiledMessage;
-import lombok.*;
+import lombok.NonNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
 import java.util.Map;
 
+public interface Message {
 
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
-@RequiredArgsConstructor(access = AccessLevel.PROTECTED)
-public class Message {
-
-    protected final CompiledMessage compiled;
-    protected PlaceholderContext context;
-
+    /**
+     * @deprecated Use {@link SimpleMessage} factory methods.
+     */
     @Deprecated
     public static Message of(@NonNull String raw) {
-        return of(null, CompiledMessage.of(raw));
+        return SimpleMessage.of(raw);
     }
 
+    /**
+     * @deprecated Use {@link SimpleMessage} factory methods.
+     */
+    @Deprecated
     public static Message of(@NonNull Locale locale, @NonNull String raw) {
-        return of(null, locale, raw);
+        return SimpleMessage.of(locale, raw);
     }
 
+    /**
+     * @deprecated Use {@link SimpleMessage} factory methods.
+     */
     @Deprecated
     public static Message of(Placeholders placeholders, @NonNull String raw) {
-        return of(placeholders, CompiledMessage.of(raw));
+        return SimpleMessage.of(placeholders, raw);
     }
 
+    /**
+     * @deprecated Use {@link SimpleMessage} factory methods.
+     */
+    @Deprecated
     public static Message of(Placeholders placeholders, @NonNull Locale locale, @NonNull String raw) {
-        return of(placeholders, CompiledMessage.of(locale, raw));
+        return SimpleMessage.of(placeholders, locale, raw);
     }
 
+    /**
+     * @deprecated Use {@link SimpleMessage} factory methods.
+     */
+    @Deprecated
     public static Message of(Placeholders placeholders, @NonNull CompiledMessage compiled) {
-
-        PlaceholderContext context = (placeholders == null)
-            ? PlaceholderContext.of(compiled)
-            : placeholders.contextOf(compiled);
-
-        return new Message(compiled, context);
+        return SimpleMessage.of(placeholders, compiled);
     }
 
-    public Message with(@NonNull String field, @Nullable Object value) {
-        if (this.context == null) throw new IllegalArgumentException("context cannot be null");
-        this.context.with(field, value);
-        return this;
-    }
+    Message with(@NonNull String field, @Nullable Object value);
 
-    public Message with(@NonNull Map<String, Object> fields) {
-        if (this.context == null) throw new IllegalArgumentException("context cannot be null");
-        this.context.with(fields);
-        return this;
-    }
+    Message with(@NonNull Map<String, Object> fields);
 
-    public Message with(@NonNull PlaceholderContext context) {
-        this.context = context;
-        return this;
-    }
+    Message with(@NonNull PlaceholderContext context);
 
-    public String apply() {
-        if (this.context == null) throw new IllegalArgumentException("context cannot be null");
-        return this.context.apply();
-    }
+    String apply();
 
-    public String raw() {
-        return this.compiled().getRaw();
-    }
+    String raw();
 
-    public CompiledMessage compiled() {
-        return this.compiled;
-    }
+    CompiledMessage compiled();
 
-    public PlaceholderContext context() {
-        return this.context;
-    }
+    PlaceholderContext context();
 }

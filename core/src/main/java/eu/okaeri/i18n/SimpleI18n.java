@@ -1,6 +1,6 @@
 package eu.okaeri.i18n;
 
-import eu.okaeri.i18n.provider.LocaleProvider;
+import eu.okaeri.i18n.locale.LocaleProvider;
 import lombok.Data;
 import lombok.NonNull;
 
