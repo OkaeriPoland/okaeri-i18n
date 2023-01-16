@@ -4,8 +4,8 @@ import eu.okaeri.bin.Bin;
 import eu.okaeri.configs.ConfigManager;
 import eu.okaeri.configs.binary.obdf.ObdfConfigurer;
 import eu.okaeri.i18n.configs.LocaleConfigManager;
-import eu.okaeri.i18n.configs.impl.SOCI18n;
-import eu.okaeri.i18n.provider.SimpleLocaleProvider;
+import eu.okaeri.i18n.configs.simple.StringOCI18n;
+import eu.okaeri.i18n.locale.SimpleLocaleProvider;
 import eu.okaeri.i18ntest.helper.CommandSender;
 import eu.okaeri.i18ntest.helper.TestLocaleConfig;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class TestSoc {
     @Test
     public void test_soc_1() {
 
-        SOCI18n i18n = new SOCI18n();
+        StringOCI18n i18n = new StringOCI18n();
         TestLocaleConfig messages = LocaleConfigManager.createTemplate(TestLocaleConfig.class);
 
         i18n.registerConfig(Locale.ENGLISH, ConfigManager.create(TestLocaleConfig.class, it -> {

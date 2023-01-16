@@ -1,4 +1,4 @@
-package eu.okaeri.i18n.configs.impl;
+package eu.okaeri.i18n.configs.simple;
 
 import eu.okaeri.i18n.configs.OCI18n;
 import eu.okaeri.i18n.message.MessageDispatcher;
@@ -10,7 +10,7 @@ import java.util.Locale;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SOCI18n extends OCI18n<String, String, MessageDispatcher<String>> {
+public class StringOCI18n extends OCI18n<String, String, MessageDispatcher<String>> {
 
     @Override
     public String storeConfigValue(@NonNull Locale locale, @NonNull Object value) {

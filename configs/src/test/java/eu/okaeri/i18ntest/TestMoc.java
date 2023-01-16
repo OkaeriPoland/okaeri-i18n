@@ -4,9 +4,9 @@ import eu.okaeri.bin.Bin;
 import eu.okaeri.configs.ConfigManager;
 import eu.okaeri.configs.binary.obdf.ObdfConfigurer;
 import eu.okaeri.i18n.configs.LocaleConfigManager;
-import eu.okaeri.i18n.configs.impl.MOCI18n;
+import eu.okaeri.i18n.configs.simple.MessageOCI18n;
 import eu.okaeri.i18n.message.Message;
-import eu.okaeri.i18n.provider.SimpleLocaleProvider;
+import eu.okaeri.i18n.locale.SimpleLocaleProvider;
 import eu.okaeri.i18ntest.helper.CommandSender;
 import eu.okaeri.i18ntest.helper.TestLocaleConfig;
 import eu.okaeri.placeholders.Placeholders;
@@ -22,7 +22,7 @@ public class TestMoc {
     @Test
     public void test_moc_1() {
 
-        MOCI18n i18n = new MOCI18n();
+        MessageOCI18n i18n = new MessageOCI18n();
         TestLocaleConfig messages = LocaleConfigManager.createTemplate(TestLocaleConfig.class);
 
         i18n.registerConfig(Locale.ENGLISH, ConfigManager.create(TestLocaleConfig.class, it -> {
@@ -54,7 +54,7 @@ public class TestMoc {
     @Test
     public void test_moc_2() {
 
-        MOCI18n i18n = new MOCI18n();
+        MessageOCI18n i18n = new MessageOCI18n();
         TestLocaleConfig messages = LocaleConfigManager.createTemplate(TestLocaleConfig.class);
 
         i18n.setPlaceholders(Placeholders.create()
