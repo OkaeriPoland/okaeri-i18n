@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>okaeri-i18n-minecraft-adventure</artifactId>
+    <artifactId>okaeri-i18n-minecraft-adventure-bungee</artifactId>
 
     <dependencies>
         <dependency>
@@ -18,17 +18,32 @@
             <version>5.0.1-beta.1</version>
         </dependency>
 
-        <!-- adventure -->
+        <dependency>
+            <groupId>eu.okaeri</groupId>
+            <artifactId>okaeri-i18n-minecraft-adventure</artifactId>
+            <version>5.0.1-beta.1</version>
+        </dependency>
+
         <dependency>
             <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-minimessage</artifactId>
+            <artifactId>adventure-text-serializer-gson</artifactId>
             <version>4.12.0</version>
         </dependency>
+
         <dependency>
-            <groupId>net.kyori</groupId>
-            <artifactId>adventure-text-serializer-legacy</artifactId>
-            <version>4.12.0</version>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-chat</artifactId>
+            <version>1.19-R0.1-SNAPSHOT</version>
+            <type>jar</type>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>bungeecord-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
 
 </project>
