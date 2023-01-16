@@ -14,6 +14,7 @@
         <module>configs</module>
 
         <module>minecraft-adventure</module>
+        <module>minecraft-adventure-bungee</module>
     </modules>
 
     <properties>
