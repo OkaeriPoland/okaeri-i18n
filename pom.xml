@@ -12,6 +12,8 @@
     <modules>
         <module>core</module>
         <module>configs</module>
+
+        <module>minecraft-adventure</module>
     </modules>
 
     <properties>
