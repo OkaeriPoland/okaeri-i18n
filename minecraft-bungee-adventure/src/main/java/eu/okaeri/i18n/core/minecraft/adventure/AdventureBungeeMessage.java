@@ -1,5 +1,6 @@
 package eu.okaeri.i18n.core.minecraft.adventure;
 
+import eu.okaeri.i18n.core.minecraft.bungee.BungeeMessage;
 import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.NonNull;
