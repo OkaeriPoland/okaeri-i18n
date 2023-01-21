@@ -61,7 +61,7 @@ public class AdventureMessage extends SimpleMessage {
             .entrySet()
             .stream()
             .collect(Collectors.toMap(
-                entry -> entry.getKey().getSource(),
+                entry -> entry.getKey().getRaw(),
                 Map.Entry::getValue
             ));
 
