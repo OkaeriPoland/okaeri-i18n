@@ -7,10 +7,15 @@ import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.NonNull;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextReplacementConfig;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
+import java.util.AbstractMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -73,7 +78,55 @@ public class AdventureMessage extends SimpleMessage {
             })
             .build();
 
-        return this.component.replaceText(replacer);
+        Component component = this.component.replaceText(replacer);
+        component = this.replaceClickEvent(component, renderedFields);
+
+        return component;
+    }
+
+    private Component replaceClickEvent(@NonNull Component component, @NonNull Map<String, String> fields) {
+
+        ClickEvent clickEvent = component.clickEvent();
+        component = component.children(component.children().stream()
+            .map(child -> this.replaceClickEvent(child, fields))
+            .collect(Collectors.toList()));
+
+        return (clickEvent == null) ? component : component.clickEvent(ClickEvent.clickEvent(
+            clickEvent.action(),
+            this.fieldReplace(clickEvent.value(), fields::get)
+        ));
+    }
+
+    private String fieldReplace(@NonNull String text, @NonNull Function<String, String> function) {
+
+        LinkedList<Map.Entry<Integer, Integer>> positions = new LinkedList<>();
+        Matcher matcher = FIELD_PATTERN.matcher(text);
+
+        while (matcher.find()) {
+            positions.push(new AbstractMap.SimpleImmutableEntry<>(
+                matcher.start(),
+                matcher.end())
+            );
+        }
+
+        StringBuilder stringBuilder = new StringBuilder(text);
+        while (!positions.isEmpty()) {
+
+            Map.Entry<Integer, Integer> position = positions.pop();
+            int start = position.getKey();
+            int end = position.getValue();
+
+            if ((start < 0) || (end < 0)) {
+                continue;
+            }
+
+            String field = text.substring((start + 1), (end - 1));
+            String result = function.apply(field);
+
+            stringBuilder.replace(start, end, result);
+        }
+
+        return stringBuilder.toString();
     }
 
     @Override
