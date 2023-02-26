@@ -2,20 +2,23 @@ package eu.okaeri.i18n.core.minecraft.adventure;
 
 import eu.okaeri.i18n.core.minecraft.bungee.BungeeMessage;
 import eu.okaeri.placeholders.Placeholders;
+import eu.okaeri.placeholders.context.PlaceholderContext;
 import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.NonNull;
-import lombok.experimental.Delegate;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 
 public class AdventureBungeeMessage extends BungeeMessage {
 
     private static final GsonComponentSerializer GSON_SERIALIZER = GsonComponentSerializer.gson();
 
-    @Delegate(excludes = Overrides.class) private final AdventureMessage adventure;
+    private final AdventureMessage adventure;
 
     protected AdventureBungeeMessage(@NonNull AdventureMessage message) {
         super(message.compiled(), message.context());
@@ -26,14 +29,33 @@ public class AdventureBungeeMessage extends BungeeMessage {
         return new AdventureBungeeMessage(AdventureMessage.of(placeholders, compiled));
     }
 
-    interface Overrides {
-        Component component();
-    }
-
     @Override
     public BaseComponent[] component() {
         String json = GSON_SERIALIZER.serialize(this.adventure.component());
         return ComponentSerializer.parse(json);
+    }
+
+    @Override
+    public AdventureBungeeMessage with(@NonNull String field, @Nullable Object value) {
+        this.adventure.with(field, value);
+        return this;
+    }
+
+    @Override
+    public AdventureBungeeMessage with(@NonNull Map<String, Object> fields) {
+        this.adventure.with(fields);
+        return this;
+    }
+
+    @Override
+    public AdventureBungeeMessage with(@NonNull PlaceholderContext context) {
+        this.adventure.with(context);
+        return this;
+    }
+
+    @Override
+    public PlaceholderContext context() {
+        return this.adventure.context();
     }
 
     /**
