@@ -5,7 +5,7 @@
     <parent>
         <artifactId>okaeri-i18n</artifactId>
         <groupId>eu.okaeri</groupId>
-        <version>5.0.1-beta.8</version>
+        <version>5.0.1-beta.9</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -15,18 +15,18 @@
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-core</artifactId>
-            <version>5.0.1-beta.8</version>
+            <version>5.0.1-beta.9</version>
         </dependency>
 
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-minecraft-bungee</artifactId>
-            <version>5.0.1-beta.8</version>
+            <version>5.0.1-beta.9</version>
         </dependency>
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-minecraft-adventure</artifactId>
-            <version>5.0.1-beta.8</version>
+            <version>5.0.1-beta.9</version>
         </dependency>
 
         <dependency>
