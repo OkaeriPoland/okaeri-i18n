@@ -46,6 +46,10 @@ public class SimpleMessage implements Message {
         return new SimpleMessage(compiled, context);
     }
 
+    public boolean isSimple() {
+        return true;
+    }
+
     @Override
     public SimpleMessage with(@NonNull String field, @Nullable Object value) {
         if (this.context == null) throw new IllegalArgumentException("context cannot be null");

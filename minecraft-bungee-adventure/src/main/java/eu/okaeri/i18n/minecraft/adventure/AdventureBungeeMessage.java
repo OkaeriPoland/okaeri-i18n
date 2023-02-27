@@ -1,6 +1,6 @@
-package eu.okaeri.i18n.core.minecraft.adventure;
+package eu.okaeri.i18n.minecraft.adventure;
 
-import eu.okaeri.i18n.core.minecraft.bungee.BungeeMessage;
+import eu.okaeri.i18n.minecraft.bungee.BungeeMessage;
 import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.context.PlaceholderContext;
 import eu.okaeri.placeholders.message.CompiledMessage;
@@ -30,6 +30,11 @@ public class AdventureBungeeMessage extends BungeeMessage {
     }
 
     @Override
+    public boolean isSimple() {
+        return this.adventure.isSimple();
+    }
+
+    @Override
     public BaseComponent[] component() {
         String json = GSON_SERIALIZER.serialize(this.adventure.component());
         return ComponentSerializer.parse(json);
@@ -56,6 +61,11 @@ public class AdventureBungeeMessage extends BungeeMessage {
     @Override
     public PlaceholderContext context() {
         return this.adventure.context();
+    }
+
+    @Override
+    public String apply() {
+        return this.adventure.apply();
     }
 
     /**
