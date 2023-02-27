@@ -1,4 +1,4 @@
-package eu.okaeri.i18n.core.minecraft.adventure;
+package eu.okaeri.i18n.minecraft.adventure;
 
 import eu.okaeri.i18n.message.SimpleMessage;
 import eu.okaeri.placeholders.Placeholders;
@@ -54,6 +54,11 @@ public class AdventureMessage extends SimpleMessage {
             : placeholders.contextOf(compiled);
 
         return new AdventureMessage(compiled, context);
+    }
+
+    @Override
+    public boolean isSimple() {
+        return this.component == null;
     }
 
     public Component component() {

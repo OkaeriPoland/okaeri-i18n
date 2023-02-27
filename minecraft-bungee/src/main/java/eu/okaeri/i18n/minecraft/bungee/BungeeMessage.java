@@ -1,4 +1,4 @@
-package eu.okaeri.i18n.core.minecraft.bungee;
+package eu.okaeri.i18n.minecraft.bungee;
 
 import eu.okaeri.i18n.message.SimpleMessage;
 import eu.okaeri.placeholders.context.PlaceholderContext;
