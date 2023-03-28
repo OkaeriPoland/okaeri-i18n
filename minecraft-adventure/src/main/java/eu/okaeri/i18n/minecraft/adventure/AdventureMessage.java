@@ -10,6 +10,7 @@ import net.kyori.adventure.text.TextReplacementConfig;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.AbstractMap;
 import java.util.LinkedList;
@@ -132,6 +133,21 @@ public class AdventureMessage extends SimpleMessage {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public AdventureMessage with(@NonNull String field, @Nullable Object value) {
+        return (AdventureMessage) super.with(field, value);
+    }
+
+    @Override
+    public AdventureMessage with(@NonNull Map<String, Object> fields) {
+        return (AdventureMessage) super.with(fields);
+    }
+
+    @Override
+    public AdventureMessage with(@NonNull PlaceholderContext context) {
+        return (AdventureMessage) super.with(context);
     }
 
     @Override
