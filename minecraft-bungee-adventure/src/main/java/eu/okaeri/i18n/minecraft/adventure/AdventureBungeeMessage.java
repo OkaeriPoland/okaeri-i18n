@@ -1,5 +1,6 @@
 package eu.okaeri.i18n.minecraft.adventure;
 
+import eu.okaeri.i18n.message.Message;
 import eu.okaeri.i18n.minecraft.bungee.BungeeMessage;
 import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.context.PlaceholderContext;
@@ -7,7 +8,9 @@ import eu.okaeri.placeholders.message.CompiledMessage;
 import lombok.NonNull;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.jetbrains.annotations.Nullable;
 
@@ -27,6 +30,23 @@ public class AdventureBungeeMessage extends BungeeMessage {
 
     public static AdventureBungeeMessage of(Placeholders placeholders, @NonNull CompiledMessage compiled) {
         return new AdventureBungeeMessage(AdventureMessage.of(placeholders, compiled));
+    }
+
+    public static Component toComponent(@NonNull Message message) {
+        if (message instanceof AdventureBungeeMessage) {
+            return ((AdventureBungeeMessage) message).adventure();
+        }
+        if (message instanceof AdventureMessage) {
+            return ((AdventureMessage) message).component();
+        }
+        return LegacyComponentSerializer.legacySection().deserialize(message.apply());
+    }
+
+    public static BaseComponent[] toTextComponent(@NonNull Message message) {
+        if (message instanceof AdventureBungeeMessage) {
+            return ((AdventureBungeeMessage) message).component();
+        }
+        return TextComponent.fromLegacyText(message.apply());
     }
 
     @Override
