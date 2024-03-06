@@ -20,7 +20,7 @@
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-configs-core</artifactId>
-            <version>3.4.1</version>
+            <version>5.0.1</version>
             <scope>compile</scope>
         </dependency>
 
