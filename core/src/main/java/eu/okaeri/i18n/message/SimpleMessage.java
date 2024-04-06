@@ -66,6 +66,11 @@ public class SimpleMessage implements Message {
 
     @Override
     public SimpleMessage with(@NonNull PlaceholderContext context) {
+        if ((context.getPlaceholders() == null) && (context.getMessage() == null)) {
+            // PlaceholderContext used as field container
+            context.getFields().forEach(this.context::with);
+            return this;
+        }
         this.context = context;
         return this;
     }
