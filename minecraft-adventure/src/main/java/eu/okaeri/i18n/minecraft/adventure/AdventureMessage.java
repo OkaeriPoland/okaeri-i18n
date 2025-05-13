@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class AdventureMessage extends SimpleMessage {
 
-    private static final Pattern SECTION_COLOR_PATTERN = Pattern.compile("(?i)§([0-9A-FK-OR])");
+    private static final Pattern SECTION_COLOR_PATTERN = Pattern.compile("§([0-9A-Fa-fK-Ok-oRXrx])");
 
     private static final Pattern ALL_TEXT_PATTERN = Pattern.compile(".*");
     private static final Pattern FIELD_PATTERN = Pattern.compile("\\{(?<content>[^}]+)\\}");

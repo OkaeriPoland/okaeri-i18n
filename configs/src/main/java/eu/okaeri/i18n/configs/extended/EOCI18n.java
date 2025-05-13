@@ -3,6 +3,7 @@ package eu.okaeri.i18n.configs.extended;
 import eu.okaeri.configs.schema.FieldDeclaration;
 import eu.okaeri.i18n.configs.LocaleConfig;
 import eu.okaeri.i18n.configs.OCI18n;
+import eu.okaeri.i18n.extended.LoaderFormatter;
 import eu.okaeri.i18n.extended.MessageColors;
 import eu.okaeri.i18n.extended.PrefixProvider;
 import eu.okaeri.i18n.message.MessageDispatcher;
@@ -12,6 +13,7 @@ import lombok.*;
 
 import java.nio.file.Files;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @NoArgsConstructor
@@ -28,6 +30,7 @@ public abstract class EOCI18n<T> extends OCI18n<CompiledMessage, T, MessageDispa
 
     protected @Getter @Setter Placeholders placeholders;
     protected @Getter @Setter PrefixProvider prefixProvider;
+    protected @Getter @Setter LoaderFormatter loaderFormatter;
 
     @Override
     public EOCI18n<T> registerConfig(@NonNull Locale locale, @NonNull LocaleConfig config) {
@@ -55,38 +58,63 @@ public abstract class EOCI18n<T> extends OCI18n<CompiledMessage, T, MessageDispa
                 continue;
             }
 
-            String fieldName = field.getName().toLowerCase(Locale.ROOT);
-            String fieldValue = String.valueOf(field.getValue());
+            String messageKey = field.getName().toLowerCase(Locale.ROOT);
+            String messageValue = String.valueOf(field.getValue());
+
+            // resolve with custom message formatter
+            if (this.getLoaderFormatter() != null) {
+                messageValue = this.getLoaderFormatter().formatMessage(messageKey, messageValue);
+            }
 
             // ignore prefix/coloring of empty messages
-            if (fieldValue.isEmpty()) {
+            if (messageValue.isEmpty()) {
                 continue;
             }
 
             // resolve prefix or empty if not applicable
             String localPrefix = "";
-            if ((this.getPrefixMarker() != null) && fieldValue.startsWith(this.getPrefixMarker())) {
-                fieldValue = fieldValue.substring(this.getPrefixMarker().length());
+            if ((this.getPrefixMarker() != null) && messageValue.startsWith(this.getPrefixMarker())) {
+                messageValue = messageValue.substring(this.getPrefixMarker().length());
                 localPrefix = this.getPrefixMarker();
             }
 
-            // do not auto-color messages with predefined colors
-            if (this.hasColors(fieldValue)) {
-                field.updateValue(localPrefix + this.color(fieldValue));
+            // do not auto-format messages with predefined colors
+            if (this.hasColors(messageValue)) {
+                field.updateValue(localPrefix + this.color(messageValue));
                 continue;
             }
 
-            // add colors based on the matchers
-            Optional<MessageColors> colorsOptional = this.matchColors(fieldName);
-            if (colorsOptional.isPresent()) {
-                // fields + message color
-                MessageColors colors = colorsOptional.get();
-                if (colors.getFieldsColor() != null) {
-                    fieldValue = MESSAGE_FIELD_PATTERN.matcher(fieldValue).replaceAll(colors.getFieldsColor() + "$0" + colors.getMessageColor());
+            // format the message
+            Optional<MessageColors> colorsOptional = this.matchColors(messageKey);
+            String fieldColor = colorsOptional.map(MessageColors::getFieldsColor).orElse("");
+            String messageColor = colorsOptional.map(MessageColors::getMessageColor).orElse("");
+
+            StringBuffer result = new StringBuffer();
+            Matcher matcher = MESSAGE_FIELD_PATTERN.matcher(messageValue);
+
+            while (matcher.find()) {
+                // handle the unformatted field marker (e.g. {r:something})
+                String rawField = matcher.group(0);
+                if (rawField.startsWith("{r:")) {
+                    matcher.appendReplacement(result, "{" + rawField.substring(3));
+                    continue;
                 }
-                // just message color
-                field.updateValue(localPrefix + colors.getMessageColor() + fieldValue);
+                // attempt to format via provided formatter
+                if (this.getLoaderFormatter() != null) {
+                    String formatResult = this.getLoaderFormatter().formatField(messageKey, rawField);
+                    if (formatResult != null) {
+                        matcher.appendReplacement(result, formatResult + messageColor);
+                        continue;
+                    }
+                }
+                // attempt to format via built-in color formatter
+                if (colorsOptional.isPresent()) {
+                    matcher.appendReplacement(result, fieldColor + rawField + messageColor);
+                }
             }
+
+            matcher.appendTail(result);
+            field.updateValue(localPrefix + messageColor + result);
         }
 
         String prefix = this.color((String) config.getDeclaration().getFields().stream()
