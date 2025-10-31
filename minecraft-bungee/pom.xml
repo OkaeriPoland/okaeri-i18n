@@ -15,23 +15,14 @@
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-core</artifactId>
-            <version>5.1.2</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>net.md-5</groupId>
             <artifactId>bungeecord-chat</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
-            <type>jar</type>
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-    <repositories>
-        <repository>
-            <id>bungeecord-repo</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </repository>
-    </repositories>
 
 </project>

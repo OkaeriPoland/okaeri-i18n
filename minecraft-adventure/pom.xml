@@ -15,19 +15,17 @@
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-core</artifactId>
-            <version>5.1.2</version>
+            <version>${project.version}</version>
         </dependency>
 
-        <!-- adventure -->
+        <!-- Adventure API -->
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-text-minimessage</artifactId>
-            <version>4.12.0</version>
         </dependency>
         <dependency>
             <groupId>net.kyori</groupId>
             <artifactId>adventure-text-serializer-legacy</artifactId>
-            <version>4.12.0</version>
         </dependency>
     </dependencies>
 

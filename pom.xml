@@ -9,6 +9,10 @@
     <packaging>pom</packaging>
     <version>5.1.2</version>
 
+    <name>okaeri-i18n</name>
+    <description>Lightweight internationalization (i18n) library built on okaeri-placeholders</description>
+    <url>https://github.com/OkaeriPoland/okaeri-i18n</url>
+
     <modules>
         <module>core</module>
         <module>configs</module>
@@ -23,33 +27,122 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+
+        <!-- Dependency versions -->
+        <lombok.version>1.18.42</lombok.version>
+        <jetbrains-annotations.version>26.0.2</jetbrains-annotations.version>
+        <junit-jupiter.version>5.14.0</junit-jupiter.version>
+
+        <!-- Okaeri dependencies -->
+        <okaeri-placeholders.version>5.1.2</okaeri-placeholders.version>
+        <okaeri-configs.version>6.0.0-beta.3</okaeri-configs.version>
+        <okaeri-configs-obdf.version>3.4.1</okaeri-configs-obdf.version>
+
+        <!-- Adventure API -->
+        <adventure.version>4.12.0</adventure.version>
+
+        <!-- Minecraft platforms -->
+        <bungeecord-chat.version>1.20-R0.2</bungeecord-chat.version>
+
+        <!-- Maven plugin versions -->
+        <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
+        <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
+        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <!-- Common dependencies -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jetbrains</groupId>
+                <artifactId>annotations</artifactId>
+                <version>${jetbrains-annotations.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Test dependencies -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- Okaeri dependencies -->
+            <dependency>
+                <groupId>eu.okaeri</groupId>
+                <artifactId>okaeri-placeholders-core</artifactId>
+                <version>${okaeri-placeholders.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.okaeri</groupId>
+                <artifactId>okaeri-configs-core</artifactId>
+                <version>${okaeri-configs.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>eu.okaeri</groupId>
+                <artifactId>okaeri-configs-binary-obdf</artifactId>
+                <version>${okaeri-configs-obdf.version}</version>
+            </dependency>
+
+            <!-- Adventure API -->
+            <dependency>
+                <groupId>net.kyori</groupId>
+                <artifactId>adventure-text-minimessage</artifactId>
+                <version>${adventure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kyori</groupId>
+                <artifactId>adventure-text-serializer-legacy</artifactId>
+                <version>${adventure.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.kyori</groupId>
+                <artifactId>adventure-text-serializer-gson</artifactId>
+                <version>${adventure.version}</version>
+            </dependency>
+
+            <!-- Minecraft platforms -->
+            <dependency>
+                <groupId>net.md-5</groupId>
+                <artifactId>bungeecord-chat</artifactId>
+                <version>${bungeecord-chat.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
+        <!-- Dependencies ALL modules need -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>22.0.0</version>
-            <scope>provided</scope>
         </dependency>
 
+        <!-- Test dependencies for ALL modules -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.2</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -57,21 +150,26 @@
         <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0-M7</version>
+                    <version>${maven-surefire-plugin.version}</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.10.1</version>
+                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
+                        <source>${maven.compiler.source}</source>
+                        <target>${maven.compiler.target}</target>
                         <compilerArgs>
                             <arg>-parameters</arg>
                         </compilerArgs>
                     </configuration>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>3.2.1</version>
+                    <version>${maven-source-plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -82,10 +180,12 @@
                     </executions>
                 </plugin>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.4.0</version>
+                    <version>${maven-javadoc-plugin.version}</version>
                     <configuration>
                         <doclint>all,-missing</doclint>
+                        <source>${maven.compiler.source}</source>
                     </configuration>
                     <executions>
                         <execution>
@@ -98,20 +198,18 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <artifactId>maven-javadoc-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
     <repositories>
         <repository>
             <id>okaeri-repo</id>
             <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 

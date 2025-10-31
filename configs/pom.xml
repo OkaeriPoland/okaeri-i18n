@@ -15,19 +15,16 @@
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-i18n-core</artifactId>
-            <version>5.1.2</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-configs-core</artifactId>
-            <version>5.0.1</version>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>eu.okaeri</groupId>
             <artifactId>okaeri-configs-binary-obdf</artifactId>
-            <version>3.4.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
