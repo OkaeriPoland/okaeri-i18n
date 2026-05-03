@@ -41,7 +41,7 @@ public class SimpleMessage implements Message {
 
         PlaceholderContext context = (placeholders == null)
             ? PlaceholderContext.of(compiled)
-            : placeholders.contextOf(compiled);
+            : placeholders.context(compiled);
 
         return new SimpleMessage(compiled, context);
     }

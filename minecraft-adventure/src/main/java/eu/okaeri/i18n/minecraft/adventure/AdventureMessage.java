@@ -53,7 +53,7 @@ public class AdventureMessage extends SimpleMessage {
 
         PlaceholderContext context = (placeholders == null)
             ? PlaceholderContext.of(compiled)
-            : placeholders.contextOf(compiled);
+            : placeholders.context(compiled);
 
         return new AdventureMessage(compiled, context);
     }
@@ -76,13 +76,7 @@ public class AdventureMessage extends SimpleMessage {
             return SECTION_SERIALIZER.deserialize(super.apply());
         }
 
-        Map<String, String> renderedFields = this.context.renderFields()
-            .entrySet()
-            .stream()
-            .collect(Collectors.toMap(
-                entry -> entry.getKey().getRaw(),
-                Map.Entry::getValue
-            ));
+        Map<String, String> renderedFields = this.context.renderFields();
 
         TextReplacementConfig replacer = TextReplacementConfig.builder()
             .match(FIELD_PATTERN)

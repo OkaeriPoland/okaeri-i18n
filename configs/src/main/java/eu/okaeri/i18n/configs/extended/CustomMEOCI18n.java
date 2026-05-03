@@ -3,8 +3,8 @@ package eu.okaeri.i18n.configs.extended;
 import eu.okaeri.i18n.message.Message;
 import eu.okaeri.placeholders.Placeholders;
 import eu.okaeri.placeholders.message.CompiledMessage;
-import eu.okaeri.placeholders.message.part.MessageElement;
-import eu.okaeri.placeholders.message.part.MessageStatic;
+import eu.okaeri.placeholders.message.MessageElement;
+import eu.okaeri.placeholders.message.StaticPart;
 import lombok.NonNull;
 
 import java.util.ArrayList;
@@ -40,11 +40,11 @@ public abstract class CustomMEOCI18n<T extends Message> extends EOCI18n<T> {
         }
 
         MessageElement firstElement = messageElements.get(0);
-        if (!(firstElement instanceof MessageStatic)) {
+        if (!(firstElement instanceof StaticPart)) {
             return message;
         }
 
-        MessageStatic staticElement = (MessageStatic) firstElement;
+        StaticPart staticElement = (StaticPart) firstElement;
         String elementValue = staticElement.getValue();
 
         if ((this.getPrefixMarker() == null) || !elementValue.startsWith(this.getPrefixMarker())) {
@@ -55,7 +55,7 @@ public abstract class CustomMEOCI18n<T extends Message> extends EOCI18n<T> {
         String base = elementValue.substring(this.getPrefixMarker().length());
 
         List<MessageElement> elementsCopy = new ArrayList<>(messageElements);
-        elementsCopy.set(0, MessageStatic.of(prefix + base));
+        elementsCopy.set(0, StaticPart.of(prefix + base));
 
         String raw = prefix + message.raw().substring(this.getPrefixMarker().length()); // wat
         CompiledMessage compiled = CompiledMessage.of(raw, elementsCopy);
