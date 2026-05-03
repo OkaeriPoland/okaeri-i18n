@@ -13,8 +13,8 @@ Add repository to the `repositories` section:
 
 ```xml
 <repository>
-    <id>okaeri-repo</id>
-    <url>https://storehouse.okaeri.eu/repository/maven-public/</url>
+    <id>okaeri-releases</id>
+    <url>https://repo.okaeri.cloud/releases</url>
 </repository>
 ```
 
@@ -24,7 +24,7 @@ Add dependency to the `dependencies` section:
 <dependency>
   <groupId>eu.okaeri</groupId>
   <artifactId>okaeri-i18n-configs</artifactId>
-  <version>5.1.2</version>
+  <version>5.2.0</version>
 </dependency>
 ```
 
@@ -33,13 +33,13 @@ Add dependency to the `dependencies` section:
 Add repository to the `repositories` section:
 
 ```groovy
-maven { url "https://storehouse.okaeri.eu/repository/maven-public/" }
+maven { url "https://repo.okaeri.cloud/releases" }
 ```
 
 Add dependency to the `maven` section:
 
 ```groovy
-implementation 'eu.okaeri:okaeri-i18n-configs:5.1.2'
+implementation 'eu.okaeri:okaeri-i18n-configs:5.2.0'
 ```
 
 ## Example
