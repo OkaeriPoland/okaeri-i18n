@@ -34,7 +34,7 @@
         <junit-jupiter.version>5.14.0</junit-jupiter.version>
 
         <!-- Okaeri dependencies -->
-        <okaeri-placeholders.version>6.0.0-beta.7</okaeri-placeholders.version>
+        <okaeri-placeholders.version>6.0.0-beta.8</okaeri-placeholders.version>
         <okaeri-configs.version>6.0.0-beta.3</okaeri-configs.version>
         <okaeri-configs-obdf.version>3.4.1</okaeri-configs-obdf.version>
 
